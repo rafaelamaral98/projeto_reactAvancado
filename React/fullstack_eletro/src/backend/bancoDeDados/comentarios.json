@@ -1,0 +1,22 @@
+[{
+  "_id": {
+    "$oid": "6024a9d14e99ed1290944721"
+  },
+  "nome": "Maradona",
+  "email": "lamanodedios86@gmail",
+  "msg": "Produtos sensacionais!"
+},{
+  "_id": {
+    "$oid": "6026d88ebd1eb31ce4138dae"
+  },
+  "nome": "Rei Pelé",
+  "email": "opaitem1000gols@gmail.com",
+  "msg": "Minha geladeira antiga tinha quebrado, e quando comprei por aqui, ela chegou muito mais rápido do que eu imaginei!"
+},{
+  "_id": {
+    "$oid": "6026db99bd1eb31ce4138daf"
+  },
+  "nome": "Ronaldinho Gaúcho",
+  "email": "bruxo80@outlook.com",
+  "msg": "Precisei comprar um fogão, e vocês realmente não decepcionaram no atendimento e na velocidade da entrega, parabéns! Ganharam mais um cliente!"
+}]

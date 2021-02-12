@@ -33,6 +33,7 @@ class Contato extends React.Component{
             const json = await resposta.json ();
             this.props.inserir(json)
             this.props.passe_negado()
+            console.log (this.props.mensagens)
         }
         
     }
@@ -61,7 +62,7 @@ class Contato extends React.Component{
     render(){
         return(
             
-            <Suspense fallback={<h1>Carregando corpo da página</h1>}>
+            <Suspense fallback={<h1>Carregando corpo da página ...</h1>}>
                 <FormasContato enviarFormulario={this.enviarFormulario} passe_livre={this.props.passe_livre} mensagens={this.props.mensagens} />
             </Suspense>
 

@@ -4,6 +4,7 @@ const mysql = require ('mysql2');
 const ejs = require ('ejs');
 const app = express();
 const cors = require('cors');
+const {inserirComentario, pegarComentario} = require('./mongoDB')
 
 let conexao = mysql.createConnection({
     host: 'localhost',
@@ -57,28 +58,23 @@ app.post ('/compra', (requisitar, resposta) =>{
     conexao.query(sql);
 })
 
-app.get('/pegarMensagem',(requisitar, resposta) => {
-    let sql = "SELECT nome, msg FROM comentarios JOIN clientes ON clientes.id_cliente = comentarios.id_cliente LIMIT 5;";
-    conexao.query(sql, (erro, resultado) =>{
-        resposta.send(resultado);
-    });
+app.get('/pegarMensagem', async (requisitar, resposta) => {
+    const result = await pegarComentario()
+    resposta.send(result)
+    console.log (result)
 });
 
-app.post('/enviarMensagem', (requisitar, resposta) => {
+app.post('/enviarMensagem', async (requisitar, resposta) => {
     let post = requisitar.body;
-    let nome = post.nome;
-    let email = post.email;
-    let msg = post.msg;
 
-    let comando1 = `INSERT INTO clientes (nome,email) VALUES ('${nome}','${email}');`
-    let comando2 = `SELECT id_cliente FROM clientes WHERE email = '${email}';`
-    
+    var comentario = {
+        nome: post.nome,
+        email: post.email,
+        msg: post.msg
+    }
 
-    conexao.query(`INSERT INTO clientes (nome,email) VALUES (?,?);`,[nome, email]);
-    conexao.query(comando2, (erro, resultado) => {
-        let comando3 = `INSERT INTO comentarios (id_cliente,msg) VALUES ('${resultado[0].id_cliente}','${msg}');`
-        conexao.query(comando3);
-    })
+    const result = await inserirComentario(comentario)
+    resposta.send(result)
 })
 
 app.listen (porta);
